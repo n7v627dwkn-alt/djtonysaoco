@@ -190,5 +190,156 @@ const elementosAnimados = document.querySelectorAll(
             elemento.classList.add("visible");
         });
     }
+/* ==================================================
+   MODAL BIZUM
+================================================== */
 
+const botonAbrirBizum =
+    document.getElementById("abrir-bizum");
+
+const botonCerrarBizum =
+    document.getElementById("cerrar-bizum");
+
+const modalBizum =
+    document.getElementById("modal-bizum");
+
+const botonCopiarBizum =
+    document.getElementById("copiar-bizum");
+
+const mensajeCopiado =
+    document.getElementById("mensaje-copiado");
+
+const numeroBizum = "637365397";
+
+
+function abrirModalBizum() {
+
+    if (!modalBizum) {
+        return;
+    }
+
+    modalBizum.setAttribute(
+        "aria-hidden",
+        "false"
+    );
+
+    document.body.classList.add(
+        "bizum-abierto"
+    );
+
+    botonCerrarBizum?.focus();
+}
+
+
+function cerrarModalBizum() {
+
+    if (!modalBizum) {
+        return;
+    }
+
+    modalBizum.setAttribute(
+        "aria-hidden",
+        "true"
+    );
+
+    document.body.classList.remove(
+        "bizum-abierto"
+    );
+
+    if (mensajeCopiado) {
+        mensajeCopiado.textContent = "";
+    }
+
+    if (botonCopiarBizum) {
+        botonCopiarBizum.innerHTML = `
+            <i
+                class="fas fa-copy"
+                aria-hidden="true"
+            ></i>
+            Copiar número
+        `;
+    }
+
+    botonAbrirBizum?.focus();
+}
+
+
+botonAbrirBizum?.addEventListener(
+    "click",
+    abrirModalBizum
+);
+
+
+botonCerrarBizum?.addEventListener(
+    "click",
+    cerrarModalBizum
+);
+
+
+modalBizum?.addEventListener(
+    "click",
+    (evento) => {
+
+        if (evento.target === modalBizum) {
+            cerrarModalBizum();
+        }
+
+    }
+);
+
+
+document.addEventListener(
+    "keydown",
+    (evento) => {
+
+        const modalEstaAbierto =
+            modalBizum?.getAttribute(
+                "aria-hidden"
+            ) === "false";
+
+        if (
+            evento.key === "Escape" &&
+            modalEstaAbierto
+        ) {
+            cerrarModalBizum();
+        }
+
+    }
+);
+
+
+botonCopiarBizum?.addEventListener(
+    "click",
+    async () => {
+
+        try {
+
+            await navigator.clipboard.writeText(
+                numeroBizum
+            );
+
+            if (mensajeCopiado) {
+                mensajeCopiado.textContent =
+                    "Número copiado correctamente.";
+            }
+
+            botonCopiarBizum.innerHTML = `
+                <i
+                    class="fas fa-check"
+                    aria-hidden="true"
+                ></i>
+                ¡Número copiado!
+            `;
+
+        } catch (error) {
+
+            if (mensajeCopiado) {
+                mensajeCopiado.textContent =
+                    "Mantén pulsado el número para copiarlo.";
+            }
+
+        }
+
+    }
+);
 });
