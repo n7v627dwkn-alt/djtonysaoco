@@ -18,11 +18,10 @@
     <title>DJ Tony Saoco | Salsa, Crossover y Reguetón</title>
 
     <!-- HOJA DE ESTILOS PRINCIPAL -->
-
-    <link
-        rel="stylesheet"
-        href="estilos.css"
-    >
+<link
+    rel="stylesheet"
+    href="estilos.css?v=20260806-3"
+>
 
     <!-- FUENTE POPPINS -->
 
@@ -601,137 +600,123 @@
 
 </footer>
 
-    <!-- ==================================================
-         MODAL PARA PEDIR CANCIONES
+</div>
 
-         Se coloca fuera de .contenedor para que funcione
-         correctamente como ventana fija en móvil y ordenador.
-    ================================================== -->
 
+<!-- ==================================================
+     MODAL PARA PEDIR CANCIONES
+================================================== -->
+
+<div
+    class="modal-peticiones"
+    id="modal-peticiones"
+    aria-hidden="true"
+>
     <div
-        class="modal-peticiones"
-        id="modal-peticiones"
-        aria-hidden="true"
+        class="modal-contenido"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titulo-peticiones"
+        aria-describedby="descripcion-peticiones"
     >
 
-        <div
-            class="modal-contenido"
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby="titulo-peticiones"
-            aria-describedby="descripcion-peticiones"
+        <button
+            class="cerrar-modal"
+            id="cerrar-peticiones"
+            type="button"
+            aria-label="Cerrar formulario de peticiones"
         >
-
-            <button
-                class="cerrar-modal"
-                id="cerrar-peticiones"
-                type="button"
-                aria-label="Cerrar formulario de peticiones"
-            >
-                <i
-                    class="fas fa-xmark"
-                    aria-hidden="true"
-                ></i>
-            </button>
-
-
-            <div
-                class="modal-icono"
+            <i
+                class="fas fa-xmark"
                 aria-hidden="true"
-            >
-                <i class="fas fa-music"></i>
-            </div>
+            ></i>
+        </button>
 
-
-            <h2 id="titulo-peticiones">
-                Pide tu canción
-            </h2>
-
-
-            <p
-                class="modal-subtitulo"
-                id="descripcion-peticiones"
-            >
-                Dime qué canción quieres escuchar
-            </p>
-
-
-            <form
-                id="formulario-peticiones"
-                autocomplete="on"
-            >
-
-                <label for="nombre-cliente">
-                    Tu nombre
-                </label>
-
-                <input
-                    id="nombre-cliente"
-                    name="nombre"
-                    type="text"
-                    maxlength="40"
-                    autocomplete="name"
-                    placeholder="Ejemplo: Laura"
-                    required
-                >
-
-
-                <label for="nombre-cancion">
-                    Canción
-                </label>
-
-                <input
-                    id="nombre-cancion"
-                    name="cancion"
-                    type="text"
-                    maxlength="80"
-                    placeholder="Título de la canción"
-                    required
-                >
-
-
-                <label for="nombre-artista">
-                    Artista
-                </label>
-
-                <input
-                    id="nombre-artista"
-                    name="artista"
-                    type="text"
-                    maxlength="80"
-                    placeholder="Nombre del artista"
-                >
-
-
-                <button
-                    class="enviar-peticion"
-                    type="submit"
-                >
-                    <i
-                        class="fab fa-whatsapp"
-                        aria-hidden="true"
-                    ></i>
-
-                    Enviar petición
-                </button>
-
-            </form>
-
-
-            <p class="aviso-peticion">
-                La petición no garantiza que la canción pueda reproducirse.
-            </p>
-
+        <div
+            class="modal-icono"
+            aria-hidden="true"
+        >
+            <i class="fas fa-music"></i>
         </div>
 
+        <h2 id="titulo-peticiones">
+            Pide tu canción
+        </h2>
+
+        <p
+            class="modal-subtitulo"
+            id="descripcion-peticiones"
+        >
+            Dime qué canción quieres escuchar
+        </p>
+
+        <form
+            id="formulario-peticiones"
+            autocomplete="on"
+        >
+
+            <label for="nombre-cliente">
+                Tu nombre
+            </label>
+
+            <input
+                id="nombre-cliente"
+                name="nombre"
+                type="text"
+                maxlength="40"
+                autocomplete="name"
+                placeholder="Ejemplo: Laura"
+                required
+            >
+
+            <label for="nombre-cancion">
+                Canción
+            </label>
+
+            <input
+                id="nombre-cancion"
+                name="cancion"
+                type="text"
+                maxlength="80"
+                placeholder="Título de la canción"
+                required
+            >
+
+            <label for="nombre-artista">
+                Artista
+            </label>
+
+            <input
+                id="nombre-artista"
+                name="artista"
+                type="text"
+                maxlength="80"
+                placeholder="Nombre del artista"
+            >
+
+            <button
+                class="enviar-peticion"
+                type="submit"
+            >
+                <i
+                    class="fab fa-whatsapp"
+                    aria-hidden="true"
+                ></i>
+
+                Enviar petición
+            </button>
+
+        </form>
+
+        <p class="aviso-peticion">
+            La petición no garantiza que la canción pueda reproducirse.
+        </p>
+
     </div>
+</div>
 
 
-    <!-- JAVASCRIPT -->
-
-    <script src="script.js"></script>
-
-  <!-- ==================================================
+<!-- ==================================================
      MODAL BIZUM
 ================================================== -->
 
@@ -754,7 +739,10 @@
             ×
         </button>
 
-        <div class="bizum-icono" aria-hidden="true">
+        <div
+            class="bizum-icono"
+            aria-hidden="true"
+        >
             <i class="fas fa-beer-mug-empty"></i>
         </div>
 
@@ -775,7 +763,11 @@
             id="copiar-bizum"
             type="button"
         >
-            <i class="fas fa-copy" aria-hidden="true"></i>
+            <i
+                class="fas fa-copy"
+                aria-hidden="true"
+            ></i>
+
             Copiar número
         </button>
 
@@ -790,7 +782,13 @@
         </p>
 
     </div>
-</div>  
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js?v=20260806-3"></script>
+
 </body>
 
 </html>
