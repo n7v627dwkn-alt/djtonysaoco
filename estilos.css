@@ -1470,3 +1470,188 @@ button.peticiones {
     letter-spacing: 0.45px;
     text-transform: uppercase;
 }
+/* ==================================================
+   CORRECCIÓN DEL MODAL DE PETICIONES
+================================================== */
+
+.modal-peticiones {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 100dvh;
+    padding: 20px;
+
+    overflow-y: auto;
+
+    background: rgba(3, 3, 6, 0.88);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Modal abierto mediante aria-hidden */
+
+.modal-peticiones[aria-hidden="false"] {
+    display: flex;
+}
+
+/* Compatibilidad por si JavaScript utiliza una clase */
+
+.modal-peticiones.activo,
+.modal-peticiones.activa,
+.modal-peticiones.abierto {
+    display: flex;
+}
+
+.modal-contenido {
+    position: relative;
+
+    width: min(100%, 520px);
+    max-height: calc(100dvh - 40px);
+    overflow-y: auto;
+
+    padding: 32px 22px 24px;
+
+    color: #ffffff;
+
+    border: 1px solid #ff2f7d;
+    border-radius: 20px;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(166, 60, 255, 0.18),
+            transparent 40%
+        ),
+        #0d0911;
+
+    box-shadow:
+        0 0 22px rgba(255, 47, 125, 0.35),
+        0 0 45px rgba(166, 60, 255, 0.18);
+}
+
+.cerrar-modal {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+
+    width: 40px;
+    height: 40px;
+
+    display: grid;
+    place-items: center;
+
+    color: #ffffff;
+    font-size: 22px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+    cursor: pointer;
+}
+
+.modal-icono {
+    margin-bottom: 12px;
+
+    color: #ff2f7d;
+    font-size: 34px;
+    text-align: center;
+
+    filter: drop-shadow(0 0 10px rgba(255, 47, 125, 0.8));
+}
+
+.modal-contenido h2 {
+    margin: 0 0 6px;
+
+    font-size: clamp(27px, 8vw, 38px);
+    line-height: 1.1;
+    text-align: center;
+}
+
+.modal-subtitulo {
+    margin: 0 0 24px;
+
+    color: #c8c2cc;
+    text-align: center;
+}
+
+#formulario-peticiones {
+    display: grid;
+    gap: 8px;
+}
+
+#formulario-peticiones label {
+    margin-top: 8px;
+
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#formulario-peticiones input {
+    width: 100%;
+    min-width: 0;
+    height: 48px;
+
+    padding: 0 14px;
+
+    color: #111111;
+    font: inherit;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #ffffff;
+}
+
+.enviar-peticion {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 16px;
+
+    color: #ffffff;
+    font: inherit;
+    font-weight: 700;
+
+    border: 0;
+    border-radius: 12px;
+
+    background: #16a34a;
+    cursor: pointer;
+}
+
+.aviso-peticion {
+    margin: 18px 0 0;
+
+    color: #bdb7c2;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: center;
+}
+
+/* Evita que el fondo se desplace con el modal abierto */
+
+body.modal-abierto {
+    overflow: hidden;
+}
+
+@media (max-width: 480px) {
+
+    .modal-peticiones {
+        align-items: flex-end;
+        padding: 12px;
+    }
+
+    .modal-contenido {
+        width: 100%;
+        max-height: calc(100dvh - 24px);
+        padding: 30px 18px 22px;
+        border-radius: 20px;
+    }
+}
