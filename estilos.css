@@ -506,9 +506,6 @@ drop-shadow(0 0 30px rgba(166,60,255,.8));
 /* ==================================================
    FOTO PRINCIPAL
 
-   La foto tiene z-index 10.
-   El texto tiene z-index 6.
-   De esta forma la cara queda delante de la última O.
 ================================================== */
 
 .foto {
@@ -524,7 +521,7 @@ drop-shadow(0 0 30px rgba(166,60,255,.8));
 .foto img {
     position: absolute;
     right: -88px;
-    bottom: 8px;
+    bottom: -70px;
     z-index: 1;
 
     width: auto;
