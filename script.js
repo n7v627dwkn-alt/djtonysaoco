@@ -1,0 +1,194 @@
+"use strict";
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* ==========================================
+       PARTÍCULAS NEÓN
+    ========================================== */
+
+    const contenedorParticulas = document.querySelector(".particulas");
+
+    if (contenedorParticulas) {
+        contenedorParticulas.innerHTML = "";
+
+        const cantidadParticulas = 60;
+
+        for (let i = 0; i < cantidadParticulas; i++) {
+            const particula = document.createElement("span");
+
+            const posicionHorizontal = Math.random() * 100;
+            const duracion = 6 + Math.random() * 8;
+            const retraso = Math.random() * 8;
+            const escala = 0.4 + Math.random() * 1.8;
+
+            particula.style.left = `${posicionHorizontal}%`;
+            particula.style.animationDuration = `${duracion}s`;
+            particula.style.animationDelay = `${retraso}s`;
+            particula.style.setProperty(
+                "--escala-particula",
+                escala.toString()
+            );
+
+            contenedorParticulas.appendChild(particula);
+        }
+    }
+
+
+    /* ==========================================
+       MODAL DE PETICIONES
+    ========================================== */
+
+    const abrirPeticiones = document.querySelector("#abrir-peticiones");
+    const cerrarPeticiones = document.querySelector("#cerrar-peticiones");
+    const modalPeticiones = document.querySelector("#modal-peticiones");
+
+    const formularioPeticiones = document.querySelector(
+        "#formulario-peticiones"
+    );
+
+    const campoNombre = document.querySelector("#nombre-cliente");
+    const campoCancion = document.querySelector("#nombre-cancion");
+    const campoArtista = document.querySelector("#nombre-artista");
+
+    let elementoConFocoAnterior = null;
+
+
+    const abrirModal = () => {
+        if (!modalPeticiones) {
+            return;
+        }
+
+        elementoConFocoAnterior = document.activeElement;
+
+        modalPeticiones.classList.add("abierto");
+        modalPeticiones.setAttribute("aria-hidden", "false");
+
+        document.body.classList.add("modal-abierto");
+
+        window.setTimeout(() => {
+            campoNombre?.focus();
+        }, 300);
+    };
+
+
+    const cerrarModal = () => {
+        if (!modalPeticiones) {
+            return;
+        }
+
+        modalPeticiones.classList.remove("abierto");
+        modalPeticiones.setAttribute("aria-hidden", "true");
+
+        document.body.classList.remove("modal-abierto");
+
+        if (elementoConFocoAnterior instanceof HTMLElement) {
+            elementoConFocoAnterior.focus();
+        } else {
+            abrirPeticiones?.focus();
+        }
+    };
+
+
+    abrirPeticiones?.addEventListener("click", abrirModal);
+
+    cerrarPeticiones?.addEventListener("click", cerrarModal);
+
+
+    modalPeticiones?.addEventListener("click", (evento) => {
+        if (evento.target === modalPeticiones) {
+            cerrarModal();
+        }
+    });
+
+
+    document.addEventListener("keydown", (evento) => {
+        const modalEstaAbierto =
+            modalPeticiones?.classList.contains("abierto");
+
+        if (
+            evento.key === "Escape" &&
+            modalEstaAbierto
+        ) {
+            cerrarModal();
+        }
+    });
+
+
+    /* ==========================================
+       ENVÍO DE PETICIONES POR WHATSAPP
+    ========================================== */
+
+    formularioPeticiones?.addEventListener("submit", (evento) => {
+        evento.preventDefault();
+
+        const nombre = campoNombre?.value.trim() ?? "";
+        const cancion = campoCancion?.value.trim() ?? "";
+        const artista = campoArtista?.value.trim() ?? "";
+
+        if (!nombre || !cancion) {
+            return;
+        }
+
+        const mensaje = [
+            "Hola Tony 🎧",
+            "",
+            `Soy ${nombre} y quiero pedir esta canción:`,
+            `🎵 ${cancion}`,
+            artista ? `🎤 Artista: ${artista}` : "",
+            "",
+            "¡Gracias!"
+        ]
+            .filter(Boolean)
+            .join("\n");
+
+        const telefono = "34637365397";
+
+        const enlaceWhatsApp =
+            `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+
+        const ventanaWhatsApp = window.open(
+            enlaceWhatsApp,
+            "_blank",
+            "noopener,noreferrer"
+        );
+
+        if (ventanaWhatsApp) {
+            ventanaWhatsApp.opener = null;
+        }
+
+        formularioPeticiones.reset();
+        cerrarModal();
+    });
+
+
+    /* ==========================================
+       ANIMACIONES AL HACER SCROLL
+    ========================================== */
+const elementosAnimados = document.querySelectorAll(
+    ".red-social-destacada, .cerveza-dj, .peticiones, .evento, .menu-grid a, .contrataciones"
+);
+    if ("IntersectionObserver" in window) {
+        const observador = new IntersectionObserver(
+            (entradas) => {
+                entradas.forEach((entrada) => {
+                    if (entrada.isIntersecting) {
+                        entrada.target.classList.add("visible");
+                        observador.unobserve(entrada.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.15
+            }
+        );
+
+        elementosAnimados.forEach((elemento) => {
+            observador.observe(elemento);
+        });
+    } else {
+        elementosAnimados.forEach((elemento) => {
+            elemento.classList.add("visible");
+        });
+    }
+
+});
