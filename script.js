@@ -651,3 +651,80 @@ async function cargarProximoEvento() {
 
 cargarProximoEvento();
 });
+/* ==========================================
+   SOBRE MÍ
+========================================== */
+
+const botonAbrirSobreMi =
+    document.getElementById("abrir-sobre-mi");
+
+const botonCerrarSobreMi =
+    document.getElementById("cerrar-sobre-mi");
+
+const seccionSobreMi =
+    document.getElementById("sobre-mi");
+
+if (
+    botonAbrirSobreMi &&
+    botonCerrarSobreMi &&
+    seccionSobreMi
+) {
+
+    botonAbrirSobreMi.addEventListener(
+        "click",
+        (evento) => {
+
+            evento.preventDefault();
+
+            const estaAbierto =
+                seccionSobreMi.getAttribute(
+                    "aria-hidden"
+                ) === "false";
+
+            seccionSobreMi.setAttribute(
+                "aria-hidden",
+                estaAbierto ? "true" : "false"
+            );
+
+            botonAbrirSobreMi.setAttribute(
+                "aria-expanded",
+                estaAbierto ? "false" : "true"
+            );
+
+            if (!estaAbierto) {
+
+                window.setTimeout(() => {
+
+                    seccionSobreMi.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
+
+                }, 50);
+
+            }
+
+        }
+    );
+
+
+    botonCerrarSobreMi.addEventListener(
+        "click",
+        () => {
+
+            seccionSobreMi.setAttribute(
+                "aria-hidden",
+                "true"
+            );
+
+            botonAbrirSobreMi.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+            botonAbrirSobreMi.focus();
+
+        }
+    );
+
+}

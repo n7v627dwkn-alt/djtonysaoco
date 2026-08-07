@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-
 <head>
 
     <meta charset="UTF-8">
@@ -12,17 +9,21 @@
 
     <meta
         name="description"
-        content="Página oficial de DJ Tony Saoco. Salsa, crossover y reguetón. Eventos, peticiones musicales y contrataciones."
+        content="DJ Tony Saoco, DJ de salsa, bachata, merengue, reguetón y crossover en Tenerife. Música latina para discotecas, fiestas, eventos y contrataciones."
     >
 
-    <title>DJ Tony Saoco | Salsa, Crossover y Reguetón</title>
+    <title>DJ Salsa Tenerife | DJ Tony Saoco - Música Latina y Eventos</title>
+
+    <link
+        rel="canonical"
+        href="https://djtonysaoco.com/"
+    >
 
     <!-- HOJA DE ESTILOS PRINCIPAL -->
 <link
     rel="stylesheet"
-    href="estilos.css?v=20260806-3"
+    href="estilos.css?v=20260807-1"
 >
-
     <!-- FUENTE POPPINS -->
 
     <link
@@ -48,9 +49,34 @@
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
     >
 
+    <!-- DATOS ESTRUCTURADOS PARA GOOGLE -->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "DJ Tony Saoco",
+        "alternateName": "Tony Saoco",
+        "url": "https://djtonysaoco.com/",
+        "image": "https://djtonysaoco.com/imagenes/fotodjsinfondo.png",
+        "jobTitle": "DJ",
+        "description": "DJ de salsa, bachata, merengue, reguetón y crossover en Tenerife. Música latina para discotecas, fiestas y eventos.",
+        "knowsAbout": [
+            "Salsa",
+            "Bachata",
+            "Merengue",
+            "Reguetón",
+            "Crossover",
+            "Música latina"
+        ],
+        "sameAs": [
+            "https://www.instagram.com/dj_tony_saoco",
+            "https://www.tiktok.com/@dj_tony_saoco"
+        ]
+    }
+    </script>
+
 </head>
-
-
 <body>
 
     <div class="contenedor">
@@ -196,7 +222,7 @@
 
                 <img
                     src="imagenes/fotodjsinfondo.png"
-                    alt="DJ Tony Saoco con auriculares"
+   alt="DJ Tony Saoco - DJ de salsa y música latina en Tenerife"
                     loading="eager"
                     decoding="async"
                 >
@@ -411,143 +437,178 @@
     </div>
 
 </article>
+<!-- ==================================================
+     MENÚ DE SECCIONES
+================================================== -->
 
-            <!-- ==================================================
-                 MENÚ DE SECCIONES
-            ================================================== -->
+<nav
+    class="menu-grid"
+    aria-label="Secciones principales"
+>
 
-            <nav
-                class="menu-grid"
-                aria-label="Secciones principales"
-            >
+    <a href="#eventos">
 
-                <a href="#eventos">
+        <i
+            class="far fa-calendar"
+            aria-hidden="true"
+        ></i>
 
-                    <i
-                        class="far fa-calendar"
-                        aria-hidden="true"
-                    ></i>
+        <span>Eventos</span>
 
-                    <span>Eventos</span>
+    </a>
 
-                </a>
+    <a href="#galeria">
 
-                <a href="#galeria">
+        <i
+            class="far fa-image"
+            aria-hidden="true"
+        ></i>
 
-                    <i
-                        class="far fa-image"
-                        aria-hidden="true"
-                    ></i>
+        <span>Galería</span>
 
-                    <span>Galería</span>
+    </a>
 
-                </a>
+    <a href="#sesiones">
 
-                <a href="#sesiones">
+        <i
+            class="far fa-circle-play"
+            aria-hidden="true"
+        ></i>
 
-                    <i
-                        class="far fa-circle-play"
-                        aria-hidden="true"
-                    ></i>
+        <span>Sesiones</span>
 
-                    <span>Sesiones</span>
+    </a>
 
-                </a>
+    <a
+        href="#sobre-mi"
+        id="abrir-sobre-mi"
+        aria-controls="sobre-mi"
+        aria-expanded="false"
+    >
 
-                <a href="#sobre-mi">
+        <i
+            class="fas fa-headphones"
+            aria-hidden="true"
+        ></i>
 
-                    <i
-                        class="fas fa-headphones"
-                        aria-hidden="true"
-                    ></i>
+        <span>Sobre mí</span>
 
-                    <span>Sobre mí</span>
+    </a>
 
-                </a>
-
-            </nav>
-
-
-            <!-- ==================================================
-                 SECCIONES PROVISIONALES
-
-                 Estas secciones evitan que los enlaces del menú
-                 apunten a lugares inexistentes. Puedes completar
-                 su contenido más adelante.
-            ================================================== -->
-
-            <section
-                id="galeria"
-                hidden
-                aria-labelledby="titulo-galeria"
-            >
-                <h2 id="titulo-galeria">
-                    Galería
-                </h2>
-            </section>
-
-            <section
-                id="sesiones"
-                hidden
-                aria-labelledby="titulo-sesiones"
-            >
-                <h2 id="titulo-sesiones">
-                    Sesiones
-                </h2>
-            </section>
-
-            <section
-                id="sobre-mi"
-                hidden
-                aria-labelledby="titulo-sobre-mi"
-            >
-                <h2 id="titulo-sobre-mi">
-                    Sobre mí
-                </h2>
-            </section>
+</nav>
 
 
-            <!-- ==================================================
-                 CONTRATACIONES
-            ================================================== -->
+<!-- ==================================================
+     SECCIONES PROVISIONALES
+================================================== -->
 
-            <a
-                class="contrataciones"
-                href="https://wa.me/34637365397?text=Hola%20Tony%2C%20me%20gustar%C3%ADa%20contratarte%20para%20un%20evento."
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Contactar con DJ Tony Saoco por WhatsApp para una contratación"
-            >
+<section
+    id="galeria"
+    hidden
+    aria-labelledby="titulo-galeria"
+>
+    <h2 id="titulo-galeria">
+        Galería
+    </h2>
+</section>
 
-                <div
-                    class="icono"
-                    aria-hidden="true"
-                >
-                    <i class="fab fa-whatsapp"></i>
-                </div>
+<section
+    id="sesiones"
+    hidden
+    aria-labelledby="titulo-sesiones"
+>
+    <h2 id="titulo-sesiones">
+        Sesiones
+    </h2>
+</section>
 
-                <div class="contenido">
 
-                    <h2>
-                        Contrataciones
-                    </h2>
+<!-- ==================================================
+     SOBRE MÍ
+================================================== -->
 
-                    <p>
-                        Llevemos la fiesta a tu evento
-                    </p>
+<section
+    id="sobre-mi"
+    aria-labelledby="titulo-sobre-mi"
+    aria-hidden="true"
+>
 
-                </div>
+    <div class="sobre-mi-contenido">
 
-                <div
-                    class="flecha"
-                    aria-hidden="true"
-                >
-                    <i class="fas fa-arrow-right"></i>
-                </div>
+        <button
+            class="cerrar-sobre-mi"
+            id="cerrar-sobre-mi"
+            type="button"
+            aria-label="Cerrar Sobre mí"
+        >
+            ×
+        </button>
 
-            </a>
+        <p class="sobre-mi-etiqueta">
+            CONÓCEME
+        </p>
 
-        </main>
+        <h2 id="titulo-sobre-mi">
+            Sobre <span>DJ Tony Saoco</span>
+        </h2>
+
+        <p class="sobre-mi-destacado">
+            DJ de salsa y música latina en Tenerife
+        </p>
+
+        <p class="sobre-mi-texto">
+            Sesiones de salsa, bachata, ranchenato, merengue,
+            reguetón y crossover para discotecas, fiestas,
+            bodas y eventos. Mi objetivo es leer la pista,
+            mantener la energía y hacer de cada sesión una experiencia.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==================================================
+     CONTRATACIONES
+================================================== -->
+
+<a
+    class="contrataciones"
+    href="https://wa.me/34637365397?text=Hola%20Tony%2C%20me%20gustar%C3%ADa%20contratarte%20para%20un%20evento."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contactar con DJ Tony Saoco por WhatsApp para una contratación"
+>
+
+    <div
+        class="icono"
+        aria-hidden="true"
+    >
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <div class="contenido">
+
+        <h2>
+            Contrataciones
+        </h2>
+
+        <p>
+            Llevemos la fiesta a tu evento
+        </p>
+
+    </div>
+
+    <div
+        class="flecha"
+        aria-hidden="true"
+    >
+        <i class="fas fa-arrow-right"></i>
+    </div>
+
+</a>
+
+</main>
 <!-- ==================================================
      PIE DE PÁGINA
 ================================================== -->
@@ -787,8 +848,7 @@
 
 <!-- JAVASCRIPT -->
 
-<script src="script.js?v=20260806-3"></script>
-
+<script src="script.js?v=20260807-1"></script>
 </body>
 
 </html>
