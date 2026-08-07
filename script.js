@@ -342,4 +342,312 @@ botonCopiarBizum?.addEventListener(
 
     }
 );
+/* ==================================================
+   EVENTOS AUTOMÁTICOS DESDE GOOGLE CALENDAR
+================================================== */
+
+const GOOGLE_CALENDAR_ID =
+    "675efd36ab0db84ff8cf3e6f4972872dbb333b6d4276f2c928d28fd308b028df@group.calendar.google.com";
+
+/*
+    Sustituye únicamente el texto entre comillas
+    por tu clave de API de Google.
+*/
+
+const GOOGLE_CALENDAR_API_KEY =
+    "AIzaSyCSGhKfvOvmmVTAq5T46YpeYpg0sNV28Q4";
+
+
+const tarjetaEvento =
+    document.querySelector(".evento");
+
+const tituloEvento =
+    tarjetaEvento?.querySelector(".evento-info h2");
+
+const datosEvento =
+    tarjetaEvento?.querySelectorAll(".evento-info p");
+
+const fechaEvento =
+    datosEvento?.[0];
+
+const ubicacionEvento =
+    datosEvento?.[1];
+
+const entradaEvento =
+    datosEvento?.[2];
+
+const etiquetaEvento =
+    tarjetaEvento?.querySelector(".etiqueta");
+
+
+function formatearFechaEvento(evento) {
+
+    const fechaInicial =
+        evento.start?.dateTime ||
+        evento.start?.date;
+
+    if (!fechaInicial) {
+        return "Fecha pendiente";
+    }
+
+    const esEventoTodoElDia =
+        Boolean(evento.start?.date);
+
+    const fecha = new Date(fechaInicial);
+
+    if (
+        Number.isNaN(fecha.getTime())
+    ) {
+        return "Fecha pendiente";
+    }
+
+    const opcionesFecha = {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+    };
+
+    let textoFecha =
+        new Intl.DateTimeFormat(
+            "es-ES",
+            opcionesFecha
+        ).format(fecha);
+
+    textoFecha =
+        textoFecha.charAt(0).toUpperCase() +
+        textoFecha.slice(1);
+
+    if (!esEventoTodoElDia) {
+
+        const hora =
+            new Intl.DateTimeFormat(
+                "es-ES",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            ).format(fecha);
+
+        textoFecha += ` · ${hora}`;
+    }
+
+    return textoFecha;
+}
+
+
+function obtenerTextoEntrada(descripcion) {
+
+    if (!descripcion) {
+        return "Consulta información";
+    }
+
+    /*
+        Utiliza la primera línea de la descripción
+        como información de entrada.
+    */
+
+    const primeraLinea =
+        descripcion
+            .split("\n")
+            .map((linea) => linea.trim())
+            .find(Boolean);
+
+    return primeraLinea || "Consulta información";
+}
+
+
+function mostrarEventoEnLaWeb(evento) {
+
+    if (!tarjetaEvento || !evento) {
+        return;
+    }
+
+    const nombre =
+        evento.summary ||
+        "Próxima sesión";
+
+    const ubicacion =
+        evento.location ||
+        "Ubicación por confirmar";
+
+    const entrada =
+        obtenerTextoEntrada(
+            evento.description
+        );
+
+    const fecha =
+        formatearFechaEvento(evento);
+
+
+    if (etiquetaEvento) {
+        etiquetaEvento.textContent =
+            "Próxima sesión";
+    }
+
+    if (tituloEvento) {
+        tituloEvento.textContent =
+            nombre;
+    }
+
+    if (fechaEvento) {
+        fechaEvento.innerHTML = `
+            <i
+                class="fa-solid fa-calendar-days"
+                aria-hidden="true"
+            ></i>
+            ${fecha}
+        `;
+    }
+
+    if (ubicacionEvento) {
+        ubicacionEvento.innerHTML = `
+            <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+            ></i>
+            ${ubicacion}
+        `;
+    }
+
+    if (entradaEvento) {
+        entradaEvento.innerHTML = `
+            <i
+                class="fa-solid fa-ticket"
+                aria-hidden="true"
+            ></i>
+            ${entrada}
+        `;
+    }
+
+    tarjetaEvento.hidden = false;
+}
+
+
+function mostrarEstadoSinEventos() {
+
+    if (!tarjetaEvento) {
+        return;
+    }
+
+    if (etiquetaEvento) {
+        etiquetaEvento.textContent =
+            "Agenda";
+    }
+
+    if (tituloEvento) {
+        tituloEvento.textContent =
+            "Próximamente";
+    }
+
+    if (fechaEvento) {
+        fechaEvento.innerHTML = `
+            <i
+                class="fa-solid fa-calendar-days"
+                aria-hidden="true"
+            ></i>
+            No hay nuevas fechas anunciadas
+        `;
+    }
+
+    if (ubicacionEvento) {
+        ubicacionEvento.innerHTML = `
+            <i
+                class="fa-solid fa-location-dot"
+                aria-hidden="true"
+            ></i>
+            Sigue mis redes para novedades
+        `;
+    }
+
+    if (entradaEvento) {
+        entradaEvento.innerHTML = `
+            <i
+                class="fa-solid fa-ticket"
+                aria-hidden="true"
+            ></i>
+            Nuevas sesiones próximamente
+        `;
+    }
+}
+
+
+async function cargarProximoEvento() {
+
+    if (
+        GOOGLE_CALENDAR_API_KEY ===
+        "PEGA_AQUI_TU_CLAVE_DE_API"
+    ) {
+        console.error(
+            "Falta configurar la clave de Google Calendar."
+        );
+
+        return;
+    }
+
+    const parametros =
+        new URLSearchParams({
+            key: GOOGLE_CALENDAR_API_KEY,
+            timeMin: new Date().toISOString(),
+            singleEvents: "true",
+            orderBy: "startTime",
+            maxResults: "1",
+            showDeleted: "false"
+        });
+
+    const calendarioCodificado =
+        encodeURIComponent(
+            GOOGLE_CALENDAR_ID
+        );
+
+    const url =
+        `https://www.googleapis.com/calendar/v3/calendars/${calendarioCodificado}/events?${parametros.toString()}`;
+
+    try {
+
+        const respuesta =
+            await fetch(url);
+
+        if (!respuesta.ok) {
+
+            const errorGoogle =
+                await respuesta
+                    .json()
+                    .catch(() => null);
+
+            console.error(
+                "Error de Google Calendar:",
+                respuesta.status,
+                errorGoogle
+            );
+
+            return;
+        }
+
+        const datos =
+            await respuesta.json();
+
+        const proximoEvento =
+            datos.items?.[0];
+
+        if (!proximoEvento) {
+            mostrarEstadoSinEventos();
+            return;
+        }
+
+        mostrarEventoEnLaWeb(
+            proximoEvento
+        );
+
+    } catch (error) {
+
+        console.error(
+            "No se pudo cargar Google Calendar:",
+            error
+        );
+    }
+}
+
+
+cargarProximoEvento();
 });
