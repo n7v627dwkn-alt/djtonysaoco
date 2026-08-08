@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", () => {
             .filter(Boolean)
             .join("\n");
 
-        const telefono = "34637365397";
+        const telefono = "34680648634";
 
         const enlaceWhatsApp =
             `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
