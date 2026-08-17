@@ -727,4 +727,92 @@ if (
         }
     );
 
+}/* ==================================================
+   CARRUSEL DE EVENTOS
+================================================== */
+
+const carruselEventos = document.querySelector(".eventos-carrusel");
+const trackEventos = document.querySelector(".eventos-track");
+const tarjetasEventos = document.querySelectorAll(".eventos-track .evento");
+const puntosEventos = document.querySelectorAll(".puntos-evento span");
+
+if (
+    carruselEventos &&
+    trackEventos &&
+    tarjetasEventos.length > 0
+) {
+
+    let eventoActual = 0;
+    let inicioX = 0;
+    let finX = 0;
+
+    function mostrarEvento(indice) {
+
+        if (indice < 0) {
+            indice = tarjetasEventos.length - 1;
+        }
+
+        if (indice >= tarjetasEventos.length) {
+            indice = 0;
+        }
+
+        eventoActual = indice;
+
+        trackEventos.style.transform =
+            `translateX(-${eventoActual * 100}%)`;
+
+        puntosEventos.forEach((punto, i) => {
+            punto.classList.toggle(
+                "activo",
+                i === eventoActual
+            );
+        });
+    }
+
+
+    /* PULSAR LOS PUNTOS */
+
+    puntosEventos.forEach((punto, indice) => {
+
+        punto.addEventListener("click", () => {
+            mostrarEvento(indice);
+        });
+
+    });
+
+
+    /* DESLIZAR CON EL DEDO */
+
+    carruselEventos.addEventListener(
+        "touchstart",
+        (e) => {
+            inicioX = e.touches[0].clientX;
+        },
+        { passive: true }
+    );
+
+    carruselEventos.addEventListener(
+        "touchend",
+        (e) => {
+
+            finX = e.changedTouches[0].clientX;
+
+            const distancia = inicioX - finX;
+
+            if (Math.abs(distancia) < 50) {
+                return;
+            }
+
+            if (distancia > 0) {
+                mostrarEvento(eventoActual + 1);
+            } else {
+                mostrarEvento(eventoActual - 1);
+            }
+
+        },
+        { passive: true }
+    );
+
+
+    mostrarEvento(0);
 }
